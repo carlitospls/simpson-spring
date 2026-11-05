@@ -5,5 +5,26 @@
     <title>Personajes</title>
 </head>
 <body>
-<p>Personajes encontrados: <strong th:text="${personajes.size()}">0</strong></p></body>
+<p>Personajes encontrados: <strong th:text="${personajes.size()}">0</strong></p>
+<table>
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Ocupación</th>
+        <th>Lugar</th>
+    </tr>
+    </thead>
+    <tbody>
+
+        <tr th:each="p : ${personajes}">
+            <td th:text="${p.nombreCompleto()}">Nombre</td>
+            <td th:text="${p.edad()}">Edad</td>
+            <td th:text="${p.ocupacion()}">Ocupación</td>
+            <td th:text="${p.lugar()}">Lugar</td>
+        </tr>
+
+    </tbody>
+</table>
+</body>
 </html>
