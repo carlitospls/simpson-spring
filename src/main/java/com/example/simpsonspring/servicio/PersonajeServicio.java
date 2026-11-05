@@ -16,6 +16,12 @@ import java.util.stream.Collectors;
 @Service
 public class PersonajeServicio {
 
+    private final PersonajeRepositorio repositorio;
+
+    public PersonajeServicio(PersonajeRepositorio repositorio) {
+        this.repositorio = repositorio;
+    }
+
     // En Spring aprenderemos a usar inyección de dependencia y no usar new...
     /**
      *
