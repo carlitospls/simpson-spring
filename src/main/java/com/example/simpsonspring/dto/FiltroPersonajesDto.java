@@ -1,6 +1,11 @@
 package com.example.simpsonspring.dto;
 
-public class FiltroPersonajeDto {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class FiltroPersonajesDto {
 
     private String lugar;
 

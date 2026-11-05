@@ -7,6 +7,22 @@
 </head>
 <body>
 <p>Personajes encontrados: <strong th:text="${personajes.size()}">0</strong></p>
+
+<form method="get" th:action="@{/personajes}" th:object="${filtro}">
+    <label>Edad máxima: <input type="number" th:field="*{edadMax}"></label>
+    <label>Límite: <input type="number" th:field="*{limite}"></label>
+    <label>Ordenar por:
+        <select th:field="*{ordenarPor}">
+            <option value="nombre">Nombre</option>
+            <option value="apellido">Apellido</option>
+            <option value="edad">Edad</option>
+            <option value="lugar">Lugar</option>
+        </select>
+    </label>
+    <label><input type="checkbox" th:field="*{descendente}"> Descendente</label>
+    <label><input type="checkbox" th:field="*{soloFamilia}"> Solo familia</label>
+    <button type="submit">Buscar</button>
+</form>
 <table>
     <thead>
     <tr>
