@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head >
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
     <meta charset="UTF-8">
     <title>Personajes</title>
 </head>
@@ -17,7 +18,7 @@
     </thead>
     <tbody>
 
-        <tr th:each="p : ${personajes}">
+        <tr th:each="p : ${personajes}" th:classappend="${p.esMenor()} ? 'menor'">
             <td th:text="${p.nombreCompleto()}">Nombre</td>
             <td th:text="${p.edad()}">Edad</td>
             <td th:text="${p.ocupacion()}">Ocupación</td>
