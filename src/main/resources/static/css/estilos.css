@@ -1,3 +1,10 @@
 table { border-collapse: collapse; }
 th, td { padding: 4px 12px; text-align: left; }
+
+/* Filas de personajes menores de 18 (clase añadida por th:classappend) */
 .menor { background-color: #fff3b0; }
+
+/* Mensajes de error de validación junto a cada campo */
+.error { color: #c00000; margin-left: 8px; }
+
+form div { margin-bottom: 8px; }
