@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Personajes</title>
+    <title>Personajes de Springfield</title>
     <!-- @{...} le añade a la ruta lo que haga falta de la aplicación -->
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
@@ -14,58 +14,65 @@
   FORMULARIO
   - method="get": los filtros viajan en la URL (?edadMax=18...), se pueden compartir.
   - th:object="${filtro}": el formulario está ligado al DTO que dejó el controlador.
-  - th:field="*{campo}": genera name, id y value por nosotros. Gracias a eso el
-    formulario CONSERVA lo que escribiste al recargar.
+  - th:field="*{campo}": genera name, id y value por nosotros, y por eso el
+    formulario CONSERVA lo que escribiste (en el JSP había que hacerlo a mano).
 -->
 <form method="get" th:action="@{/personajes}" th:object="${filtro}">
 
-    <div>
-        <label>Lugar:
+    <fieldset>
+        <legend>Filtrar</legend>
+
+        <label>Lugar
             <select th:field="*{lugar}">
                 <!-- value="" = sin filtro. El servicio trata "" igual que null -->
-                <option value="">Todos</option>
+                <option value="">— Todos —</option>
                 <!-- Una <option> por cada lugar que preparó el controlador -->
                 <option th:each="l : ${lugares}" th:value="${l}" th:text="${l}"></option>
             </select>
         </label>
-    </div>
 
-    <div>
-        <label>Ocupación:
+        <label>Ocupación
             <select th:field="*{ocupacion}">
-                <option value="">Todas</option>
+                <option value="">— Todos —</option>
                 <option th:each="o : ${ocupaciones}" th:value="${o}" th:text="${o}"></option>
             </select>
         </label>
-    </div>
 
-    <div>
-        <label>Edad máxima: <input type="number" th:field="*{edadMax}"></label>
-        <!-- Solo aparece si ESTE campo tiene error; el texto sale de messages.properties -->
-        <span class="error" th:if="${#fields.hasErrors('edadMax')}" th:errors="*{edadMax}"></span>
-    </div>
+        <label>Edad máxima
+            <input type="number" th:field="*{edadMax}">
+            <!-- Solo aparece si ESTE campo tiene error; el texto sale de messages.properties -->
+            <span class="error" th:if="${#fields.hasErrors('edadMax')}" th:errors="*{edadMax}"></span>
+        </label>
 
-    <div>
-        <label>Ordenar por:
+        <label class="check">
+            <input type="checkbox" th:field="*{soloFamilia}">
+            Solo familia Simpson
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Ordenar</legend>
+
+        <label>Ordenar por
             <select th:field="*{ordenarPor}">
                 <option value="nombre">Nombre</option>
                 <option value="apellido">Apellido</option>
                 <option value="edad">Edad</option>
                 <option value="lugar">Lugar</option>
             </select>
+            <span class="error" th:if="${#fields.hasErrors('ordenarPor')}" th:errors="*{ordenarPor}"></span>
         </label>
-        <span class="error" th:if="${#fields.hasErrors('ordenarPor')}" th:errors="*{ordenarPor}"></span>
-    </div>
 
-    <div>
-        <label><input type="checkbox" th:field="*{descendente}"> Descendente</label>
-        <label><input type="checkbox" th:field="*{soloFamilia}"> Solo familia</label>
-    </div>
+        <label class="check">
+            <input type="checkbox" th:field="*{descendente}">
+            Descendente
+        </label>
 
-    <div>
-        <label>Límite: <input type="number" th:field="*{limite}"></label>
-        <span class="error" th:if="${#fields.hasErrors('limite')}" th:errors="*{limite}"></span>
-    </div>
+        <label>Mostrar como máximo
+            <input type="number" th:field="*{limite}">
+            <span class="error" th:if="${#fields.hasErrors('limite')}" th:errors="*{limite}"></span>
+        </label>
+    </fieldset>
 
     <button type="submit">Buscar</button>
     <!-- Vuelve a /personajes sin parámetros: todo limpio -->
@@ -75,10 +82,10 @@
 <!-- RESULTADOS: solo se muestran si NO hay errores de validación -->
 <div th:unless="${hayErrores}">
 
-    <p>Personajes encontrados: <strong th:text="${personajes.size()}">0</strong></p>
+    <p class="resumen"><strong th:text="${personajes.size()}">0</strong> personajes encontrados</p>
 
     <!-- Lista vacía: mensaje en lugar de una tabla sin filas -->
-    <p th:if="${personajes.isEmpty()}">No hay personajes con esos filtros</p>
+    <p class="vacio" th:if="${personajes.isEmpty()}">No hay personajes con esos filtros</p>
 
     <table th:unless="${personajes.isEmpty()}">
         <thead>
