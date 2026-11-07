@@ -32,6 +32,7 @@ public class PersonajeController {
     // Spring ejecuta estos métodos ANTES de listar() y deja lo que devuelven
     // en el Model con el nombre indicado. La vista las lee como ${lugares}
     // y ${ocupaciones}.
+    // Listas para los <select>: Spring ejecuta estos métodos ANTES de listar() y deja el resultado en el Model.
     @ModelAttribute("lugares")
     public List<String> lugares() {
         return servicio.lugaresDisponibles();
@@ -44,6 +45,9 @@ public class PersonajeController {
 
     // ---- Petición GET /personajes (con o sin filtros en la URL) --------
     @GetMapping
+    // >>> EXAMEN [FILTRO NUEVO] 1/4: aquí se pasa el valor nuevo del DTO al servicio (filtro.getX()).
+    //     Los otros 3 sitios: FiltroPersonajesDto (campo + validación), PersonajeServicio.buscar (parámetro + .filter),
+    //     personajes.html (input con th:field). Si hay errores se devuelve la vista SIN buscar y sin tabla.
     public String listar(
             // 1) Spring crea el DTO y lo rellena con los parámetros de la URL
             //    (?edadMax=18&limite=5...), y lo guarda en el Model como "filtro".

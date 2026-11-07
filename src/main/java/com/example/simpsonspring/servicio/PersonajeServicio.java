@@ -32,6 +32,8 @@ public class PersonajeServicio {
      * @param limite
      * @return
      */
+    // >>> EXAMEN [FILTRO NUEVO] 2/4: añade un parámetro aquí y una línea .filter(p -> param == null || condición) abajo.
+    //     Patrón de filtro opcional: si el valor es null/vacío, deja pasar todo.
     public List<Personaje> buscar(String lugar,
                                   Integer edadMax,
                                   String ordernaPor, // pendiente
@@ -97,6 +99,7 @@ public class PersonajeServicio {
      * @param descendente
      * @return
      */
+    // >>> EXAMEN [ORDEN NUEVO]: para ordenar por otro campo, añade un 'case' al switch. thenComparing(nombre) resuelve los empates.
     private Comparator<Personaje> crearComparador(String ordenaPor, boolean descendente){
         Comparator<Personaje> comparador = switch( ordenaPor == null ? "" : ordenaPor){
 

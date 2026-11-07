@@ -38,6 +38,7 @@
             </select>
         </label>
 
+        <!-- >>> EXAMEN [FILTRO NUEVO] 4/4: copia este bloque <label> para el filtro nuevo (th:field, span de error con th:errors). -->
         <label>Edad máxima
             <input type="number" th:field="*{edadMax}">
             <!-- Solo aparece si ESTE campo tiene error; el texto sale de messages.properties -->
@@ -80,6 +81,7 @@
 </form>
 
 <!-- RESULTADOS: solo se muestran si NO hay errores de validación -->
+<!-- Resultados: solo si NO hay errores de validación (hayErrores lo pone el controlador en el Model). -->
 <div th:unless="${hayErrores}">
 
     <p class="resumen"><strong th:text="${personajes.size()}">0</strong> personajes encontrados</p>

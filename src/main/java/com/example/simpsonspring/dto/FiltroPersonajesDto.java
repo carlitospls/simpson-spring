@@ -25,6 +25,8 @@ public class FiltroPersonajesDto {
     // El message="{clave}" busca el texto en messages.properties, no está escrito aquí.
     @Min(value = 0, message = "{filtro.edadMax.rango}")
     @Max(value = 120, message = "{filtro.edadMax.rango}")
+    // >>> EXAMEN [FILTRO NUEVO] 3/4 / [VALIDACIÓN NUEVA]: campos del formulario con sus anotaciones. Integer = opcional (vacío -> null).
+    //     Cada message="{clave}" necesita su línea en messages.properties. El nombre del campo = th:field del formulario.
     private Integer edadMax;
 
     // boolean: un checkbox marcado = true, sin marcar = false.
